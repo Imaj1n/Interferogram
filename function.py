@@ -29,6 +29,7 @@ def read_img_as_interferogram(filename,row):
     # Normalsasi data
     normalized = (grayscale - np.min(grayscale)) / (np.max(grayscale) - np.min(grayscale))
 
+    plt.figure(figsize=(10.5,4.5))
     plt.plot(normalized)
     plt.xlim(0, len(normalized))
     plt.ylim(0, 1)
