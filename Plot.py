@@ -13,7 +13,7 @@ def image_to_bytes(image):
     return buf.getvalue()
 
 def main():
-    st.title("Plot Interferogram")
+    st.title("Plot Interferogram 🔍")
     st.write("Unggah foto, crop, rotasi, dan lihat plot distribusi intensitas")
 
     # Unggah gambar
