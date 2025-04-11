@@ -1,8 +1,22 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from skimage import io
-import os
+import streamlit as st
 import pandas as pd
+import os
+
+
+#fungsi untuk memperhalus noise
+def wavelet_denoising(intensity_data, wavelet='db4', level=3):
+    coeffs = pywt.wavedec(intensity_data, wavelet, level=level)
+    sigma = np.median(np.abs(coeffs[-level])) / 0.6745
+    uthresh = sigma * np.sqrt(2*np.log(len(intensity_data)))
+    coeffs[1:] = (pywt.threshold(c, value=uthresh, mode='soft') for c in coeffs[1:])
+    return pywt.waverec(coeffs, wavelet)
+
+#fungsi untuk memperhalus noise
+def savitzky_golay(intensity_data, window_length=15, polyorder=2):
+    return savgol_filter(intensity_data, window_length, polyorder)
 
 def read_img_as_interferogram(filename,row):
     try:
@@ -28,6 +42,11 @@ def read_img_as_interferogram(filename,row):
 
     # Normalsasi data
     normalized = (grayscale - np.min(grayscale)) / (np.max(grayscale) - np.min(grayscale))
+    if st.checkbox("Tekan ini untuk memperhalus noise"):
+      normalized = savitzky_golay(normalized)
+      normalized = wavelet_denoising(normalized)
+    else : 
+      pass
 
     plt.figure(figsize=(10.5,4.5))
     plt.plot(normalized)
