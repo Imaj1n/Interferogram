@@ -59,8 +59,8 @@ def main():
             # st.image(cropped_image, caption=f"Setelah crop: {cropped_image.width} x {cropped_image.height} piksel", use_column_width=True)
 
             # Tampilkan informasi koordinat mouse saat hover
-            st.subheader("Informasi Piksel")
-            st.write("Arahkan mouse ke gambar untuk melihat koordinat piksel")
+            st.subheader("Visualisasi Intensitas ternormalisasi")
+            st.write("Hasil ini akan memberikan hasil plot dari pola fringe berdasarkan nilai grayscale foto")
 
             # Konversi gambar ke array numpy untuk interaktivitas
             img_array = np.array(cropped_image)
