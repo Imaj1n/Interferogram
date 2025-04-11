@@ -32,6 +32,7 @@ pydeck==0.9.1
 pyparsing==3.2.1
 python-dateutil==2.9.0.post0
 pytz==2025.1
+PyWavelets==1.8.0
 referencing==0.36.2
 rpds-py==0.23.1
 scikit-image==0.25.2
