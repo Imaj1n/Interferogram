@@ -54,7 +54,7 @@ def read_img_as_interferogram(filename,row):
     plt.plot(normalized)
     plt.xlim(0, len(normalized))
     plt.ylim(0, 1)
-    plt.xlabel('Intensity Distribution')
-    plt.ylabel('Normalized Intensity')
+    plt.xlabel(f'Pixel Position at row {row_data}')
+    plt.ylabel('Normalized Intensity Distribution')
     plt.grid()
     return plt
