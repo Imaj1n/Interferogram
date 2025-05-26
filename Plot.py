@@ -76,7 +76,7 @@ def main():
             if int(row)>int(cropped_image.height):
               st.error("Baris harus lebih kecil dari tinggi gambar")
             else :
-              fig = read_img_as_interferogram(uploaded_file,row)
+              fig,df = read_img_as_interferogram(uploaded_file,row)
               st.pyplot(fig)
               # Tambahkan download button untuk gambar hasil edit
                # Simpan fig ke dalam objek BytesIO
@@ -91,5 +91,13 @@ def main():
                   file_name="interferogram.png",
                   mime="image/png"
               )
+              csv = df.to_csv(index=False).encode('utf-8')
+              # Tombol download
+              st.download_button(
+                    label="📥 Download Tabel Intensitas sebagai CSV",
+                    data=csv,
+                    file_name='data_tabel.csv',
+                    mime='text/csv'
+                )
 if __name__ == "__main__":
     main()
