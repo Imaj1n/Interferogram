@@ -63,14 +63,5 @@ def read_img_as_interferogram(filename,row):
     }
     df = pd.DataFrame(data)
 
-    # Konversi DataFrame ke CSV
-    csv = df.to_csv(index=False).encode('utf-8')
-    
-    # Tombol download
-    st.download_button(
-        label="📥 Download Tabel Intensitas sebagai CSV",
-        data=csv,
-        file_name='data_tabel.csv',
-        mime='text/csv'
-    )
-    return plt
+
+    return plt,df
