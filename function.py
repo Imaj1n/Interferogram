@@ -58,7 +58,7 @@ def read_img_as_interferogram(filename,row):
     plt.ylabel('Normalized Intensity Distribution')
     plt.grid()
 
-    data = data = {
+    data = {
     'Intensitas': normalized
     }
     df = pd.DataFrame(data)
