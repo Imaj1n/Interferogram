@@ -7,8 +7,6 @@ import os
 import cv2
 import pandas as pd
 import matplotlib.patches as patches
-
-# fungsi kamu dari file lain
 from function import read_img_as_interferogram
 
 
