@@ -6,6 +6,36 @@ from scipy.signal import savgol_filter
 import pywt
 import pandas as pd
 import os
+import cv2
+
+
+def read_video_as_interferogram(video_file, row, frame_step=1):
+    """
+    Membaca video dan mengekstrak distribusi intensitas dari baris tertentu di tiap frame.
+    frame_step: ambil setiap n frame agar tidak terlalu berat.
+    """
+    cap = cv2.VideoCapture(video_file)
+    if not cap.isOpened():
+        raise ValueError("Tidak bisa membuka file video.")
+
+    frames_data = []
+    frame_idx = 0
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+        if frame_idx % frame_step == 0:
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            if row < gray.shape[0]:
+                normalized = (gray[row, :] - np.min(gray[row, :])) / (np.max(gray[row, :]) - np.min(gray[row, :]))
+                frames_data.append(normalized)
+        frame_idx += 1
+
+    cap.release()
+    frames_data = np.array(frames_data)
+    return frames_data  # shape = (jumlah_frame, lebar_gambar)
+
 
 
 #fungsi untuk memperhalus noise
